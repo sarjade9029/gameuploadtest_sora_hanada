@@ -20,7 +20,7 @@ void Enemy::Init()
 	aliveFlag = false;
 }
 //敵の更新
-void Enemy::Update(Player&player,Scr&scr)
+void Enemy::Update(Player&player,Scroll&scroll)
 {
 	if (aliveFlag == true)
 	{
@@ -76,19 +76,19 @@ void Enemy::Update(Player&player,Scr&scr)
 		}
 	}
 
-	if (X >= SCREEN_W + scr.scrX)//スクリーンの右端外
+	if (X >= SCREEN_W + scroll.scrollPositionX)//スクリーンの右端外
 	{
 		outside_screen = true;
 	}
-	if (X + W <= scr.scrX)
+	if (X + W <= scroll.scrollPositionX)
 	{
 		outside_screen = true;
 	}
-	if (Y + H <= scr.scrY)
+	if (Y + H <= scroll.scrollPositionY)
 	{
 		outside_screen = true;
 	}
-	if (Y >= SCREEN_H + scr.scrY)
+	if (Y >= SCREEN_H + scroll.scrollPositionY)
 	{
 		outside_screen = true;
 	}
@@ -112,7 +112,7 @@ void Enemy::Update(Player&player,Scr&scr)
 	}
 
 	//画面内
-	if ((X + W < SCREEN_W + scr.scrX && X > 64 + scr.scrX) && (Y > 64 + scr.scrY && Y + H < SCREEN_H + scr.scrY))
+	if ((X + W < SCREEN_W + scroll.scrollPositionX && X > 64 + scroll.scrollPositionX) && (Y > 64 + scroll.scrollPositionY && Y + H < SCREEN_H + scroll.scrollPositionY))
 	{
 		outside_screen = false;
 	}
@@ -133,10 +133,10 @@ void Enemy::Update(Player&player,Scr&scr)
 	}
 }
 //敵の描画
-void Enemy::Draw(Scr&scr)
+void Enemy::Draw(Scroll&scroll)
 {
     if (aliveFlag == true)//ここは働いている
     {
-            DrawRotaGraph2F(X - scr.scrX, Y - scr.scrY,0.0,0.0,1.5,0.0, Graph, TRUE);
+            DrawRotaGraph2F(X - scroll.scrollPositionX, Y - scroll.scrollPositionY,0.0,0.0,1.5,0.0, Graph, TRUE);
     }
 }

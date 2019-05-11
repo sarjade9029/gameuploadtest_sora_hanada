@@ -97,13 +97,13 @@ void Map::Drawtut()
 	}
 }
 
-void Map::DrawMain(Scr&scr)
+void Map::DrawMain(Scroll&scroll)
 {
 	for (int i = 0; i < MAINMAP_HEIGHT; i++)
 	{
 		for (int j = 0; j < MAINMAP_WIDTH; j++)
 		{
-			DrawRectGraph(j * ALLMAP_CHIP_SIZE - scr.scrX, i * ALLMAP_CHIP_SIZE - scr.scrY, // 画面の表示位置 x, y
+			DrawRectGraph(j * ALLMAP_CHIP_SIZE - scroll.scrollPositionX, i * ALLMAP_CHIP_SIZE - scroll.scrollPositionY, // 画面の表示位置 x, y
 				(datamain[i][j] % 4) * ALLMAP_CHIP_SIZE, (datamain[i][j] / 4) * ALLMAP_CHIP_SIZE,         // 元画像の切り出し位置 x, y
 				ALLMAP_CHIP_SIZE, ALLMAP_CHIP_SIZE,         // 切り出しサイズ　幅・高さ
 				MapChip, false, false);           // 元画像のハンドル、透明、反転

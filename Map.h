@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "DxLib.h"
-#include "Scr.h"
+#include "Scroll.h"
 #define TUTMAP_WIDTH       30
 #define TUTMAP_HEIGHT      17
 #define ALLMAP_CHIP_SIZE	64
@@ -13,7 +13,7 @@ public:
 	void Inittut();
 	void InitMain();
 	void Drawtut();
-	void DrawMain(Scr&scr);
+	void DrawMain(Scroll&scroll);
 
 	unsigned char datatut[TUTMAP_HEIGHT][TUTMAP_WIDTH];
 	unsigned char datamain[MAINMAP_HEIGHT][MAINMAP_WIDTH];

@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "DxLib.h"
-#include "Scr.h"
+#include "Scroll.h"
 #include "Common.h"
 class Enemy 
 {
@@ -20,7 +20,7 @@ public:
 	bool	outside_screen;
 	bool	aliveFlag;
 	void    Init();
-    void    Update(Player&player,Scr&scr);
-    void    Draw(Scr&scr);
+    void    Update(Player&player,Scroll&scroll);
+    void    Draw(Scroll&scroll);
 
 };

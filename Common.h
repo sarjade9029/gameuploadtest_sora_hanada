@@ -15,5 +15,5 @@
 
 class Player;
 class Enemy;
-class Scr;
+class Scroll;
 class Add;

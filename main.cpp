@@ -8,7 +8,7 @@
 #include "Shot.h"
 #include "target.h"
 #include "Map.h"
-#include "Scr.h"
+#include "Scroll.h"
 #include "HitCheck.h"
 #include "bitmapText.h"
 #include "UI.h"
@@ -23,7 +23,7 @@ Tg *target;						//ターゲット　
 Map map;						//マップ
 HitCheck hitcheck;				//敵、自機の弾の判定　	
 EnemyShot **enemyshot;			//敵の弾
-Scr scr;						//スクロール
+Scroll scroll;						//スクロール
 UI ui;							//UI
 BitmapText text;				//テキスト　
 Bonus bouns;
@@ -192,7 +192,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			//以下ゲーム
 
 			//機能確認済み
-			player.Update(scr);
+			player.Update(scroll);
 
 			//7回しか回さない
 			for (int i = 0; i < SHOT; i++)
@@ -207,7 +207,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 				for (int j = 0; j < ENEMY; j++)
 				{
 					//動いている
-					enemyshot[i][j].Update(scr);
+					enemyshot[i][j].Update(scroll);
 
 					//ここはプレイヤーは分身しないからショットを回すだけでいい
 					hitcheck.hitcheck_pes(player, enemyshot[i][j], ui);
@@ -217,7 +217,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 					}
 				}
 
-				shot[i].Update(scr);
+				shot[i].Update(scroll);
 
 				for (int j = 0; j < TARGET; j++)
 				{
@@ -305,7 +305,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 						{
 							enemy[i].X = rand() % (1664) + (128);
 							enemy[i].Y = rand() % (824) + (128);
-							enemy[i].Y += scr.scrY;
+							enemy[i].Y += scroll.scrollPositionY;
 							enemy[i].aliveFlag = true;
 							enemy[i].Life = 3;
 							player.witeTime = 60;
@@ -319,9 +319,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 							(player.positionY > 1080 && player.positionY + player.height < 2176))
 						{
 							enemy[i].X = rand() % (1664) + (128);
-							enemy[i].X += scr.scrX;
+							enemy[i].X += scroll.scrollPositionX;
 							enemy[i].Y = rand() % (824) + (128);
-							enemy[i].Y += scr.scrY;
+							enemy[i].Y += scroll.scrollPositionY;
 							enemy[i].aliveFlag = true;
 							enemy[i].Life = 3;
 							player.witeTime = 60;
@@ -334,7 +334,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 							(player.positionY > 64 && player.positionY + player.height < 1080))
 						{
 							enemy[i].X = rand() % (1664) + (128);
-							enemy[i].X += scr.scrX;
+							enemy[i].X += scroll.scrollPositionX;
 							enemy[i].Y = rand() % (824) + (128);
 							enemy[i].aliveFlag = true;
 							enemy[i].Life = 3;
@@ -344,54 +344,54 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 				}
 				if (enemy[i].aliveFlag == true)
 				{
-					enemy[i].Update(player, scr);
+					enemy[i].Update(player, scroll);
 				}
 			}
 			bouns.Update(player);
 			//スクロールさせる
-			scr.Update(player);
+			scroll.Update(player);
 			//以下描画
-			map.DrawMain(scr);
+			map.DrawMain(scroll);
 			for (int i = 0; i < ENEMY; i++)
 			{
 				//エネミーの発生は時間がかかるから少し待つ
-				enemy[i].Draw(scr);
+				enemy[i].Draw(scroll);
 			}
 			for (int i = 0; i < TARGET; i++)
 			{
 				//的の描画
-				target[i].Draw(scr);
+				target[i].Draw(scroll);
 			}
 			for (int i = 0; i < SHOT; i++)
 			{
 				//描画完了動く
-				shot[i].Draw(scr);
+				shot[i].Draw(scroll);
 			}
 			//光るエネミーショット及びプレイヤーショットここから
 			for (int i = 0; i < SHOT; i++)
 			{
 				for (int j = 0; j < ENEMY; j++)
 				{
-					enemyshot[i][j].Draw(scr);
+					enemyshot[i][j].Draw(scroll);
 				}
 			}
 			//ここの中に入れると通常描画＋加算描画される
 			SetDrawBlendMode(DX_BLENDMODE_ADD, 255);
 			for (int i = 0; i < SHOT; i++)
 			{
-				shot[i].Draw(scr);
+				shot[i].Draw(scroll);
 			}
 			for (int i = 0; i < SHOT; i++)
 			{
 				for (int j = 0; j < ENEMY; j++)
 				{
-					enemyshot[i][j].Draw(scr);
+					enemyshot[i][j].Draw(scroll);
 				}
 			}
 			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 			//光るエネミーショット及びプレイヤーショットここまで
 
-			player.Draw(scr);
+			player.Draw(scroll);
 
 			//フォントサイズの倍率変更
 			text.settextsize(2, 2);

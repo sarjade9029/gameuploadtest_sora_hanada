@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "DxLib.h"
-#include "Scr.h"
+#include "Scroll.h"
 #include "Common.h"
 #include "Enemy.h"
 #include "player.h"
@@ -35,7 +35,7 @@ public:
 
     void	Init();						//初期化
 	void    Setshot( Player* player );
-    void	Update(Scr&scr);
-    void	Draw(Scr&scr);
+    void	Update(Scroll&scroll);
+    void	Draw(Scroll&scroll);
 
 };

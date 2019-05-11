@@ -21,7 +21,7 @@ void EnemyShot::enemyShotSet(Player&player,Enemy&enemy)
 	enemyShotX = enemyShotX - (enemyShotW * 0.5);
 	enemyShotY = enemyShotY - (enemyShotH * 0.5);
 	NumericAngle = atan2f((float)(player.positionY + (player.height * 0.75) - enemyShotY), (float)(player.positionX + (player.width * 0.75) - enemyShotX));
-	angle = - NumericAngle * 180 / DX_PI_F ;
+	angle = - NumericAngle * 180 / DX_PI_F ;//
 	sectorvec = enemy.sectorvec;
 	if (enemyShotflag == false && enemy.HitFlag == true)
 	{
@@ -31,14 +31,14 @@ void EnemyShot::enemyShotSet(Player&player,Enemy&enemy)
 	enemy.enemyShotintarvalcount = 30;//待ち時間これは働いている
 }
 
-void EnemyShot::Update(Scr&scr)
+void EnemyShot::Update(Scroll&scroll)
 {
 	if (enemyShotflag == true)
 	{
 		enemyShotX += cosf(NumericAngle + sectorvec) * speed;//反復
 		enemyShotY += sinf(NumericAngle + sectorvec) * speed;
 	}
-	if (/*enemyShotX > SCREEN_W + enemyShotW + scr.scrX ||*/ enemyShotX < 63 || enemyShotY < 63 /*|| enemyShotY > SCREEN_H + enemyShotH + scr.scrY*/ || enemyShotX > SCREEN_W * 2 - (enemyShotW + 64) || enemyShotY > SCREEN_H * 2 - (enemyShotH + 48) || enemyShotX < scr.scrX || enemyShotY <scr.scrY)//動いていなかったら弾の挙動がおかしくなる、消えないし
+	if (/*enemyShotX > SCREEN_W + enemyShotW + scroll.scrollPositionX ||*/ enemyShotX < 63 || enemyShotY < 63 /*|| enemyShotY > SCREEN_H + enemyShotH + scroll.scrollPositionY*/ || enemyShotX > SCREEN_W * 2 - (enemyShotW + 64) || enemyShotY > SCREEN_H * 2 - (enemyShotH + 48) || enemyShotX < scroll.scrollPositionX || enemyShotY <scroll.scrollPositionY)//動いていなかったら弾の挙動がおかしくなる、消えないし
 	{
 		enemyShotVisibleFlag = false;//外に出たら見えなくして
 	}
@@ -48,10 +48,10 @@ void EnemyShot::Update(Scr&scr)
 	}
 }
 
-void EnemyShot::Draw(Scr&scr)
+void EnemyShot::Draw(Scroll&scroll)
 {
 	if (enemyShotVisibleFlag == true)
 	{
-		DrawRotaGraph2F(enemyShotX - scr.scrX + (enemyShotW * 0.5),enemyShotY - scr.scrY + (enemyShotH * 0.5),(enemyShotW * 0.5), (enemyShotH * 0.5),1.0,(double)NumericAngle + sectorvec,enemyShotGraph,TRUE);//表示
+		DrawRotaGraph2F(enemyShotX - scroll.scrollPositionX + (enemyShotW * 0.5),enemyShotY - scroll.scrollPositionY + (enemyShotH * 0.5),(enemyShotW * 0.5), (enemyShotH * 0.5),1.0,(double)NumericAngle + sectorvec,enemyShotGraph,TRUE);//表示
 	}
 }

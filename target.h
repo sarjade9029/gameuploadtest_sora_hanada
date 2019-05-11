@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "DxLib.h"
-#include "Scr.h"
+#include "Scroll.h"
 class Tg
 {
 public:
@@ -29,5 +29,5 @@ public:
 	
 	void Init();			//初期化
 	void Update();			//更新
-	void Draw(Scr&scr);		//描画
+	void Draw(Scroll&scroll);		//描画
 };

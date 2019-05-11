@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "DxLib.h"
-#include "Scr.h"
+#include "Scroll.h"
 #include "player.h"
 #include "Enemy.h"
 #include <math.h>
@@ -23,6 +23,6 @@ public:
 	bool	enemyShotVisibleFlag;
 	void    Init();
 	void	enemyShotSet(Player&player,Enemy&enemy);
-	void    Update(Scr&scr);
-	void    Draw(Scr&scr);
+	void    Update(Scroll&scroll);
+	void    Draw(Scroll&scroll);
 };

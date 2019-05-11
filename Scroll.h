@@ -3,11 +3,11 @@
 #include "Common.h"
 #include "Player.h"
 
-class Scr
+class Scroll
 {
 public:
-	int scrX;
-	int scrY;
+	int scrollPositionX;
+	int scrollPositionY;
 	void Init();
 	void Update(Player & player);
 };

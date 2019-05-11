@@ -59,7 +59,7 @@ void Tg::Update()
 	}
 }
 
-void Tg::Draw(Scr&scr)
+void Tg::Draw(Scroll&scroll)
 {
 	//クリスタルの描画
 	if (Thp != 0)
@@ -68,42 +68,42 @@ void Tg::Draw(Scr&scr)
 
 		if (PptFlag == true)
 		{
-			DrawRotaGraph2F(X - scr.scrX, Y - scr.scrY, 0.0, 0.0, 1.55, 0.0, blueGraph, TRUE);
+			DrawRotaGraph2F(X - scroll.scrollPositionX, Y - scroll.scrollPositionY, 0.0, 0.0, 1.55, 0.0, blueGraph, TRUE);
 		}
 		if (Thp == 3)
 		{
-			DrawRotaGraph2F(X - scr.scrX, Y - scr.scrY, 0.0, 0.0, 1.55, 0.0, blueGraph3, TRUE);
+			DrawRotaGraph2F(X - scroll.scrollPositionX, Y - scroll.scrollPositionY, 0.0, 0.0, 1.55, 0.0, blueGraph3, TRUE);
 		}
 		if (Thp == 2)
 		{
-			DrawRotaGraph2F(X - scr.scrX, Y - scr.scrY, 0.0, 0.0, 1.55, 0.0, blueGraph2, TRUE);
+			DrawRotaGraph2F(X - scroll.scrollPositionX, Y - scroll.scrollPositionY, 0.0, 0.0, 1.55, 0.0, blueGraph2, TRUE);
 		}
 		if (Thp == 1)
 		{
-			DrawRotaGraph2F(X - scr.scrX, Y - scr.scrY, 0.0, 0.0, 1.55, 0.0, blueGraph1, TRUE);
+			DrawRotaGraph2F(X - scroll.scrollPositionX, Y - scroll.scrollPositionY, 0.0, 0.0, 1.55, 0.0, blueGraph1, TRUE);
 		}
 
 		//赤表示
 		if (EptFlag == true)
 		{
-			DrawRotaGraph2F(X - scr.scrX, Y - scr.scrY, 0.0, 0.0, 1.55, 0.0, redGraph, TRUE);
+			DrawRotaGraph2F(X - scroll.scrollPositionX, Y - scroll.scrollPositionY, 0.0, 0.0, 1.55, 0.0, redGraph, TRUE);
 		}
 		if (Thp == -3)
 		{
-			DrawRotaGraph2F(X - scr.scrX, Y - scr.scrY, 0.0, 0.0, 1.55, 0.0, redGraph3, TRUE);
+			DrawRotaGraph2F(X - scroll.scrollPositionX, Y - scroll.scrollPositionY, 0.0, 0.0, 1.55, 0.0, redGraph3, TRUE);
 		}
 		if (Thp == -2)
 		{
-			DrawRotaGraph2F(X - scr.scrX, Y - scr.scrY, 0.0, 0.0, 1.55, 0.0, redGraph2, TRUE);
+			DrawRotaGraph2F(X - scroll.scrollPositionX, Y - scroll.scrollPositionY, 0.0, 0.0, 1.55, 0.0, redGraph2, TRUE);
 		}
 		if (Thp == -1)
 		{
-			DrawRotaGraph2F(X - scr.scrX, Y - scr.scrY, 0.0, 0.0, 1.55, 0.0, redGraph1, TRUE);
+			DrawRotaGraph2F(X - scroll.scrollPositionX, Y - scroll.scrollPositionY, 0.0, 0.0, 1.55, 0.0, redGraph1, TRUE);
 		}
 	}
 	else
 	{
-		DrawRotaGraph2F(X - scr.scrX, Y - scr.scrY, 0.0, 0.0, 1.55, 0.0, grayGraph, TRUE);
+		DrawRotaGraph2F(X - scroll.scrollPositionX, Y - scroll.scrollPositionY, 0.0, 0.0, 1.55, 0.0, grayGraph, TRUE);
 	}
 
 	//32*i+1=感覚を踏まえた値
