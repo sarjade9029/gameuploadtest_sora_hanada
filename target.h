@@ -4,7 +4,7 @@
 class Tg
 {
 public:
-	int Thp;			//ターゲットの細かい状態
+	int t;			//ターゲットの細かい状態
 	int Ppt;			//プレイヤーのポイント
 	int Ept;			//敵のポイント
 	int X;				//横座標

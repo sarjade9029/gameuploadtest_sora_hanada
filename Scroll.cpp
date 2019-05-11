@@ -6,7 +6,7 @@ void Scroll::Init()
 }
 void Scroll::Update(Player&player)
 {
-	if (player.positionY > scrollPositionY + 720)//下に進
+	if (player.positionY > scrollPositionY + 720)
 	{
 		if (scrollPositionY < 1096 )
 		{
@@ -20,7 +20,7 @@ void Scroll::Update(Player&player)
 			scrollPositionY += (player.positionY - (scrollPositionY + 360));
 		}
 	}
-	if (player.positionX > scrollPositionX + 1280)//右に進
+	if (player.positionX > scrollPositionX + 1280)
 	{
 		if (scrollPositionX < 1920 )
 		{

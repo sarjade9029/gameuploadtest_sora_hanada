@@ -16,7 +16,7 @@ public:
     int		xSpeed;						//横速度
     int		ySpeed;						//縦速度
     int		image;						//画像
-	//場所が違う
+	//場所を変える
 	int		witeTime;					//敵出現までの時間
 	int		score;						//実際のスコア
 	int		playerScore;				//表示されるスコア
