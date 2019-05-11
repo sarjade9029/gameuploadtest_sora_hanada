@@ -4,21 +4,14 @@
 //弾の初期化
 void Shot::Init()
 {
-    // ショットのグラフィックをメモリにロード.
     Graph = LoadGraph("data/texture/blueshot.png");
-
-
-    // 弾が画面上に存在しているか保持する変数に『存在していない』を意味するfalseを代入しておく
     VisibleFlag = false;
 	directionflag = false;
-	
 	wite = 15;
 	Dmg = 1;
-    // 弾のグラフィックのサイズ
     GetGraphSizeF(Graph, &W, &H);
 	Ys = 10;
 	Xs = 10;
-
 	Shotflag = false;
 }
 
@@ -26,9 +19,9 @@ void Shot::Setshot(Player* player)
 {
 	//プレイヤーの画像の中央を取る
 	//プレイヤーの横幅の中心
-	X = (player->X) + (player->W*0.75);
+	X = (player->positionX) + (player->width*0.75);
 	//プレイヤーの縦の中心
-	Y = (player->Y) + (player->H*0.75);
+	Y = (player->positionY) + (player->height*0.75);
 	if (Shotflag == false && player->direction != 0)
 	{
 		VisibleFlag = true;

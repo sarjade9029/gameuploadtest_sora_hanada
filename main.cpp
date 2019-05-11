@@ -280,43 +280,43 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 				}
 
 				//敵を出現させるためのもの
-				if (ui.framenum % 150 == 0 && enemy[i].aliveFlag == false && player.witetime == 0)
+				if (ui.framenum % 150 == 0 && enemy[i].aliveFlag == false && player.witeTime == 0)
 				{
 
 					//左上
 					if (ui.enemycount < 5)
 					{
-						if ((player.X + player.W < 1920 && player.X > 64) &&
-							(player.Y > 64 && player.Y + player.H < 1080))
+						if ((player.positionX + player.width < 1920 && player.positionX > 64) &&
+							(player.positionY > 64 && player.positionY + player.height < 1080))
 						{
 							enemy[i].X = rand() % (1664) + (128);
 							enemy[i].Y = rand() % (824) + (128);
 							enemy[i].aliveFlag = true;
 							enemy[i].Life = 3;
-							player.witetime = 60;
+							player.witeTime = 60;
 						}
 					}
 
 					//左下
 					if (ui.enemycount2 < 5)
 					{
-						if ((player.X + player.W < 1920 && player.X > 64) &&
-							(player.Y > 1080 && player.Y + player.H < 2176))
+						if ((player.positionX + player.width < 1920 && player.positionX > 64) &&
+							(player.positionY > 1080 && player.positionY + player.height < 2176))
 						{
 							enemy[i].X = rand() % (1664) + (128);
 							enemy[i].Y = rand() % (824) + (128);
 							enemy[i].Y += scr.scrY;
 							enemy[i].aliveFlag = true;
 							enemy[i].Life = 3;
-							player.witetime = 60;
+							player.witeTime = 60;
 						}
 					}
 
 					//右下
 					if (ui.enemycount3 < 5)
 					{
-						if ((player.X + player.W < 3840 && player.X > 1920) &&
-							(player.Y > 1080 && player.Y + player.H < 2176))
+						if ((player.positionX + player.width < 3840 && player.positionX > 1920) &&
+							(player.positionY > 1080 && player.positionY + player.height < 2176))
 						{
 							enemy[i].X = rand() % (1664) + (128);
 							enemy[i].X += scr.scrX;
@@ -324,21 +324,21 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 							enemy[i].Y += scr.scrY;
 							enemy[i].aliveFlag = true;
 							enemy[i].Life = 3;
-							player.witetime = 60;
+							player.witeTime = 60;
 						}
 					}
 					//右上
 					if (ui.enemycount4 < 5)
 					{
-						if ((player.X + player.W < 3840 && player.X > 1920) &&
-							(player.Y > 64 && player.Y + player.H < 1080))
+						if ((player.positionX + player.width < 3840 && player.positionX > 1920) &&
+							(player.positionY > 64 && player.positionY + player.height < 1080))
 						{
 							enemy[i].X = rand() % (1664) + (128);
 							enemy[i].X += scr.scrX;
 							enemy[i].Y = rand() % (824) + (128);
 							enemy[i].aliveFlag = true;
 							enemy[i].Life = 3;
-							player.witetime = 60;
+							player.witeTime = 60;
 						}
 					}
 				}
@@ -397,7 +397,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			text.settextsize(2, 2);
 			//文字の描画
 			char buf[128];
-			sprintf(buf, "Score : %d", player.plscore);
+			sprintf(buf, "Score : %d", player.playerScore);
 			//文字色　黒
 			text.setFontColor(255, 0, 128);
 			//文字の影の色　紫
@@ -421,7 +421,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 			//フォントサイズの倍率変更
 			text.settextsize(2, 2);
-			sprintf(buf, "Player HP : %d", player.Hp);
+			sprintf(buf, "Player HP : %d", player.hitPoint);
 			//文字色　黒
 			text.setFontColor(0, 255, 128);
 			//文字の影の色　緑
@@ -431,7 +431,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			//場所
 			text.textDrawWithShadow(20, 0, buf);
 			//プレイヤーが死ぬ、時間経過、LALTを押すとゲームオーバー
-			if (player.Hp <= 0 || (ui.framenum / 60) >= 90 || CheckHitKey(KEY_INPUT_LALT))
+			if (player.hitPoint <= 0 || (ui.framenum / 60) >= 90 || CheckHitKey(KEY_INPUT_LALT))
 			{
 				status = OVER;
 			}
@@ -453,7 +453,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			DrawGraph(0, 0, ui.endGraph, true);
 			char buf[128];
 
-			sprintf(buf, "Your Score : %d", player.score + (player.Hp * 100));
+			sprintf(buf, "Your Score : %d", player.score + (player.hitPoint * 100));
 			//文字色　黒
 			text.setFontColor(255, 255, 255);
 			//文字の影の色　紫

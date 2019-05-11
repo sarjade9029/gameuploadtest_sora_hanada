@@ -6,18 +6,18 @@
 void HitCheck::hitcheck_pes(Player& player,EnemyShot& enemyshot,UI&ui)
 {
 	//敵弾とプレイヤーの座標
-	if (enemyshot.enemyShotVisibleFlag == true && player.HitFlag == true)
+	if (enemyshot.enemyShotVisibleFlag == true && player.hitFlag == true)
 	{
 		// エネミーと弾の当たり判定
-		if (((enemyshot.enemyShotX > player.X && enemyshot.enemyShotX < player.X + player.W * 1.5) ||
-			(player.X > enemyshot.enemyShotX && player.X < enemyshot.enemyShotX + enemyshot.enemyShotW)) &&
-			((enemyshot.enemyShotY > player.Y && enemyshot.enemyShotY < player.Y + player.H * 1.5) ||
-			(player.Y > enemyshot.enemyShotY && player.Y < enemyshot.enemyShotY + enemyshot.enemyShotH)))
+		if (((enemyshot.enemyShotX > player.positionX && enemyshot.enemyShotX < player.positionX + player.width * 1.5) ||
+			(player.positionX > enemyshot.enemyShotX && player.positionX < enemyshot.enemyShotX + enemyshot.enemyShotW)) &&
+			((enemyshot.enemyShotY > player.positionY && enemyshot.enemyShotY < player.positionY + player.height * 1.5) ||
+			(player.positionY > enemyshot.enemyShotY && player.positionY < enemyshot.enemyShotY + enemyshot.enemyShotH)))
 		{
 			// 接触している場合は当たった弾の存在を消す
 			enemyshot.enemyShotVisibleFlag = false;
 			//ここに敵ダメージ処理を入れる
-			player.Hp -= enemyshot.enemyShotDmg;
+			player.hitPoint -= enemyshot.enemyShotDmg;
 			PlaySoundMem(ui.shothit, DX_PLAYTYPE_BACK);
 		}
 	}
@@ -80,25 +80,25 @@ void HitCheck::hitcheck_psc(Tg& target, Shot&shot,UI&ui)
 
 void HitCheck::hitcheck_pc(Tg& target, Player&player)
 {
-	if (player.HitFlag == true && target.Thp < 5)
+	if (player.hitFlag == true && target.Thp < 5)
 	{
 		// ターゲットと自弾の当たり判定
-		if (((player.X > target.X && player.X < target.X + target.W * 1.55) ||
-			(target.X > player.X && target.X < player.X + player.W * 1.5)) &&
-			((player.Y > target.Y && player.Y < target.Y + target.H * 1.55) ||
-			(target.Y > player.Y && target.Y < player.Y + player.H * 1.5)))
+		if (((player.positionX > target.X && player.positionX < target.X + target.W * 1.55) ||
+			(target.X > player.positionX && target.X < player.positionX + player.width * 1.5)) &&
+			((player.positionY > target.Y && player.positionY < target.Y + target.H * 1.55) ||
+			(target.Y > player.positionY && target.Y < player.positionY + player.height * 1.5)))
 		{
 			//接触しているだけ,hpと引き換えに相手にダメージ？
 			//ここで止めるなり戻すなりする
-			if (player.X > target.X && player.X <= target.X + target.W * 1.55)
+			if (player.positionX > target.X && player.positionX <= target.X + target.W * 1.55)
 			{
-				player.X = target.X + target.W * 1.55 + 7;
+				player.positionX = target.X + target.W * 1.55 + 7;
 			}
 		}
 		else
 		{
-			player.Ys = 7;
-			player.Xs = 7;
+			player.ySpeed = 7;
+			player.xSpeed = 7;
 		}
 	}
 }

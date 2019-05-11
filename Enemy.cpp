@@ -125,7 +125,7 @@ void Enemy::Update(Player&player,Scr&scr)
 	if (aliveFlag == false)
 	{
 		player.score += point;
-		player.scoreflag = true;
+		player.scoreFlag = true;
 		HitFlag = false;
 		outside_screen =false;
 		Life = 3;

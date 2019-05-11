@@ -20,7 +20,7 @@ void EnemyShot::enemyShotSet(Player&player,Enemy&enemy)
 	enemyShotY = enemy.Y + (enemy.H * 0.75);//敵の中央
 	enemyShotX = enemyShotX - (enemyShotW * 0.5);
 	enemyShotY = enemyShotY - (enemyShotH * 0.5);
-	NumericAngle = atan2f((float)(player.Y + (player.H * 0.75) - enemyShotY), (float)(player.X + (player.W * 0.75) - enemyShotX));//個々の数値がいかれている
+	NumericAngle = atan2f((float)(player.positionY + (player.height * 0.75) - enemyShotY), (float)(player.positionX + (player.width * 0.75) - enemyShotX));
 	angle = - NumericAngle * 180 / DX_PI_F ;
 	sectorvec = enemy.sectorvec;
 	if (enemyShotflag == false && enemy.HitFlag == true)

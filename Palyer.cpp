@@ -5,17 +5,16 @@ void Player::Init()
 	direction = 0;
 	direction2 = 0;
 	shotIntervalCount = 15;
-	Img = LoadGraph("data/texture/bluebox.png");
-	Hp = 100;
-    X = 912;
-    Y = 492;
-    Xs = 7;
-    Ys = 7;
-	addcounter = 1;
-	witetime = 60;
-	HitFlag = true;
-	scoreflag = false;
-	GetGraphSize(Img, &W, &H);
+	image = LoadGraph("data/texture/bluebox.png");
+	hitPoint = 100;
+    positionX = 912;
+    positionY = 492;
+    xSpeed = 7;
+    ySpeed = 7;
+	witeTime = 60;
+	hitFlag = true;
+	scoreFlag = false;
+	GetGraphSize(image, &width, &height);
 }
 
 //プレイヤーの更新
@@ -25,19 +24,19 @@ void Player::Update(Scr&scr)
 	{
 		shotIntervalCount--;
 	}
-	if (witetime != 0)
+	if (witeTime != 0)
 	{
-		witetime--;
+		witeTime--;
 	}
-	if (scoreflag == true)
+	if (scoreFlag == true)
 	{
-		if (plscore <= score)
+		if (playerScore <= score)
 		{
-			plscore++;
-			plscore++;
-			if (plscore == score)
+			playerScore++;
+			playerScore++;
+			if (playerScore == score)
 			{
-				scoreflag = false;
+				scoreFlag = false;
 			}
 		}
 	}
@@ -45,40 +44,40 @@ void Player::Update(Scr&scr)
 	//左移動
     if (CheckHitKey(KEY_INPUT_A) == 1)
     {
-		X -= Xs;
+		positionX -= xSpeed;
     }
 	//右移動
     if (CheckHitKey(KEY_INPUT_D) == 1)
     {
-		X += Xs;
+		positionX += xSpeed;
     }
 	//上移動
 	if (CheckHitKey(KEY_INPUT_W) == 1)
 	{
-		Y -= Ys;
+		positionY -= ySpeed;
 	}
 	//下移動
 	if (CheckHitKey(KEY_INPUT_S) == 1)
 	{
-		Y += Ys;
+		positionY += ySpeed;
 	}
 
 	//強制壁判定
-	if (X > SCREEN_W - (W + 15 + 64) + scr.scrX)//外に出ようとすると戻される
+	if (positionX > SCREEN_W - (width + 15 + 64) + scr.scrX)//外に出ようとすると戻される
 	{
-		X = SCREEN_W - (W + 15 + 64) + scr.scrX;//
+		positionX= SCREEN_W - (width + 15 + 64) + scr.scrX;//
 	}
-	if (X < 64)
+	if (positionX < 64)
 	{
-		X = 64;
+		positionX = 64;
 	}
-	if (Y < 64)
+	if (positionY < 64)
 	{
-		Y = 64;
+		positionY = 64;
 	}
-	if (Y > SCREEN_H - (H + 15 + 64) + scr.scrY)
+	if (positionY > SCREEN_H - (height + 15 + 64) + scr.scrY)
 	{
-		Y = SCREEN_H - (H + 15 + 64) + scr.scrY;
+		positionY = SCREEN_H - (height + 15 + 64) + scr.scrY;
 	}
 
 	//弾の発射制御と方向及び   動作確認済み
@@ -163,9 +162,9 @@ void Player::Update(Scr&scr)
 		}
 	}
 
-	if (Hp <= 0)
+	if (hitPoint <= 0)
 	{
-		HitFlag = false;
+		hitFlag = false;
 	}
 
 }
@@ -173,8 +172,8 @@ void Player::Update(Scr&scr)
 //プレイヤーの描画
 void Player::Draw(Scr&scr)
 {
-	if (HitFlag == true)
+	if (hitFlag == true)
 	{
-		DrawRotaGraph2F(X - scr.scrX,Y - scr.scrY,0,0,1.5,0.0,Img,TRUE);
+		DrawRotaGraph2F(positionX - scr.scrX,positionY - scr.scrY,0,0,1.5,0.0,image,TRUE);
 	}
 }
