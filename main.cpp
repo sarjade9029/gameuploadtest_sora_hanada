@@ -305,7 +305,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 						{
 							enemy[i].X = rand() % (1664) + (128);
 							enemy[i].Y = rand() % (824) + (128);
-							enemy[i].Y += scroll.scrollPositionY;
+							enemy[i].Y += scroll.positionY;
 							enemy[i].aliveFlag = true;
 							enemy[i].Life = 3;
 							player.witeTime = 60;
@@ -319,9 +319,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 							(player.positionY > 1080 && player.positionY + player.height < 2176))
 						{
 							enemy[i].X = rand() % (1664) + (128);
-							enemy[i].X += scroll.scrollPositionX;
+							enemy[i].X += scroll.positionX;
 							enemy[i].Y = rand() % (824) + (128);
-							enemy[i].Y += scroll.scrollPositionY;
+							enemy[i].Y += scroll.positionY;
 							enemy[i].aliveFlag = true;
 							enemy[i].Life = 3;
 							player.witeTime = 60;
@@ -334,7 +334,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 							(player.positionY > 64 && player.positionY + player.height < 1080))
 						{
 							enemy[i].X = rand() % (1664) + (128);
-							enemy[i].X += scroll.scrollPositionX;
+							enemy[i].X += scroll.positionX;
 							enemy[i].Y = rand() % (824) + (128);
 							enemy[i].aliveFlag = true;
 							enemy[i].Life = 3;

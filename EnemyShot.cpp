@@ -38,7 +38,7 @@ void EnemyShot::Update(Scroll&scroll)
 		enemyShotX += cosf(NumericAngle + sectorvec) * speed;//反復
 		enemyShotY += sinf(NumericAngle + sectorvec) * speed;
 	}
-	if (/*enemyShotX > SCREEN_W + enemyShotW + scroll.scrollPositionX ||*/ enemyShotX < 63 || enemyShotY < 63 /*|| enemyShotY > SCREEN_H + enemyShotH + scroll.scrollPositionY*/ || enemyShotX > SCREEN_W * 2 - (enemyShotW + 64) || enemyShotY > SCREEN_H * 2 - (enemyShotH + 48) || enemyShotX < scroll.scrollPositionX || enemyShotY <scroll.scrollPositionY)//動いていなかったら弾の挙動がおかしくなる、消えないし
+	if (/*enemyShotX > SCREEN_W + enemyShotW + scroll.positionX ||*/ enemyShotX < 63 || enemyShotY < 63 /*|| enemyShotY > SCREEN_H + enemyShotH + scroll.positionY*/ || enemyShotX > SCREEN_W * 2 - (enemyShotW + 64) || enemyShotY > SCREEN_H * 2 - (enemyShotH + 48) || enemyShotX < scroll.positionX || enemyShotY <scroll.positionY)//動いていなかったら弾の挙動がおかしくなる、消えないし
 	{
 		enemyShotVisibleFlag = false;//外に出たら見えなくして
 	}
@@ -52,6 +52,6 @@ void EnemyShot::Draw(Scroll&scroll)
 {
 	if (enemyShotVisibleFlag == true)
 	{
-		DrawRotaGraph2F(enemyShotX - scroll.scrollPositionX + (enemyShotW * 0.5),enemyShotY - scroll.scrollPositionY + (enemyShotH * 0.5),(enemyShotW * 0.5), (enemyShotH * 0.5),1.0,(double)NumericAngle + sectorvec,enemyShotGraph,TRUE);//表示
+		DrawRotaGraph2F(enemyShotX - scroll.positionX + (enemyShotW * 0.5),enemyShotY - scroll.positionY + (enemyShotH * 0.5),(enemyShotW * 0.5), (enemyShotH * 0.5),1.0,(double)NumericAngle + sectorvec,enemyShotGraph,TRUE);//表示
 	}
 }

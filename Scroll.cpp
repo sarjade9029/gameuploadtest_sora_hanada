@@ -1,37 +1,37 @@
 ﻿#include "Scroll.h"
 void Scroll::Init()
 {
-	scrollPositionX = 0;
-	scrollPositionY = 0;
+	positionX = 0;
+	positionY = 0;
 }
 void Scroll::Update(Player&player)
 {
-	if (player.positionY > scrollPositionY + 720)
+	if (player.positionY > positionY + 720)
 	{
-		if (scrollPositionY < 1096 )
+		if (positionY < 1096 )
 		{
-			scrollPositionY += (player.positionY - (scrollPositionY + 720));
+			positionY += (player.positionY - (positionY + 720));
 		}
 	}
-	if (player.positionY < scrollPositionY + 360)
+	if (player.positionY < positionY + 360)
 	{
-		if (scrollPositionY > 0)
+		if (positionY > 0)
 		{
-			scrollPositionY += (player.positionY - (scrollPositionY + 360));
+			positionY += (player.positionY - (positionY + 360));
 		}
 	}
-	if (player.positionX > scrollPositionX + 1280)
+	if (player.positionX > positionX + 1280)
 	{
-		if (scrollPositionX < 1920 )
+		if (positionX < 1920 )
 		{
-			scrollPositionX += (player.positionX - (scrollPositionX + 1280));
+			positionX += (player.positionX - (positionX + 1280));
 		}
 	}
-	if (player.positionX < scrollPositionX + 640)
+	if (player.positionX < positionX + 640)
 	{
-		if (scrollPositionX > 0)
+		if (positionX > 0)
 		{
-			scrollPositionX += (player.positionX - (scrollPositionX + 640));
+			positionX += (player.positionX - (positionX + 640));
 		}
 	}
 }

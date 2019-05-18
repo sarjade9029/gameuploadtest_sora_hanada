@@ -76,19 +76,19 @@ void Enemy::Update(Player&player,Scroll&scroll)
 		}
 	}
 
-	if (X >= SCREEN_W + scroll.scrollPositionX)//スクリーンの右端外
+	if (X >= SCREEN_W + scroll.positionX)//スクリーンの右端外
 	{
 		outside_screen = true;
 	}
-	if (X + W <= scroll.scrollPositionX)
+	if (X + W <= scroll.positionX)
 	{
 		outside_screen = true;
 	}
-	if (Y + H <= scroll.scrollPositionY)
+	if (Y + H <= scroll.positionY)
 	{
 		outside_screen = true;
 	}
-	if (Y >= SCREEN_H + scroll.scrollPositionY)
+	if (Y >= SCREEN_H + scroll.positionY)
 	{
 		outside_screen = true;
 	}
@@ -112,7 +112,7 @@ void Enemy::Update(Player&player,Scroll&scroll)
 	}
 
 	//画面内
-	if ((X + W < SCREEN_W + scroll.scrollPositionX && X > 64 + scroll.scrollPositionX) && (Y > 64 + scroll.scrollPositionY && Y + H < SCREEN_H + scroll.scrollPositionY))
+	if ((X + W < SCREEN_W + scroll.positionX && X > 64 + scroll.positionX) && (Y > 64 + scroll.positionY && Y + H < SCREEN_H + scroll.positionY))
 	{
 		outside_screen = false;
 	}
@@ -137,6 +137,6 @@ void Enemy::Draw(Scroll&scroll)
 {
     if (aliveFlag == true)//ここは働いている
     {
-            DrawRotaGraph2F(X - scroll.scrollPositionX, Y - scroll.scrollPositionY,0.0,0.0,1.5,0.0, Graph, TRUE);
+            DrawRotaGraph2F(X - scroll.positionX, Y - scroll.positionY,0.0,0.0,1.5,0.0, Graph, TRUE);
     }
 }

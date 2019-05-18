@@ -6,8 +6,8 @@
 class Scroll
 {
 public:
-	int scrollPositionX;				//画面スクロールの横の位置
-	int scrollPositionY;				//画面スクロールの縦の位置
+	int positionX;				//画面スクロールの横の位置
+	int positionY;				//画面スクロールの縦の位置
 
 	void Init();						//
 	void Update(Player & player);		//

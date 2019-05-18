@@ -78,7 +78,7 @@ void Shot::Update(Scroll&scroll)
 			X += Xs;
 		}
 	}
-	if (X > SCREEN_W - W + scroll.scrollPositionX|| X < 64 || Y < 64 || Y > SCREEN_H - H + scroll.scrollPositionY || X > SCREEN_W * 2 - (W + 64) || Y > SCREEN_H * 2 - (H + 48) || X < scroll.scrollPositionX || Y < scroll.scrollPositionY)//動いていなかったら弾の挙動がおかしくなる、消えないし
+	if (X > SCREEN_W - W + scroll.positionX|| X < 64 || Y < 64 || Y > SCREEN_H - H + scroll.positionY || X > SCREEN_W * 2 - (W + 64) || Y > SCREEN_H * 2 - (H + 48) || X < scroll.positionX || Y < scroll.positionY)//動いていなかったら弾の挙動がおかしくなる、消えないし
 	{
 		VisibleFlag = false;
 	}
@@ -105,23 +105,23 @@ void Shot::Draw(Scroll&scroll)
 		{
 			if (!East && !West)
 			{
-				DrawRotaGraph2F(X - scroll.scrollPositionX,Y - scroll.scrollPositionY,0.0,0.0,1.0, 0.0,Graph, TRUE);//上下
+				DrawRotaGraph2F(X - scroll.positionX,Y - scroll.positionY,0.0,0.0,1.0, 0.0,Graph, TRUE);//上下
 			}
 		}
 		if (East || West)
 		{
 			if (!South && !North)
 			{
-				DrawRotaGraph2F(X - scroll.scrollPositionX,Y - scroll.scrollPositionY,0.0,0.0,1.0, DX_PI_F/2,Graph, TRUE);//左右
+				DrawRotaGraph2F(X - scroll.positionX,Y - scroll.positionY,0.0,0.0,1.0, DX_PI_F/2,Graph, TRUE);//左右
 			}
 		}
 		if ((North && East) || (South && West))
 		{
-			DrawRotaGraph2F(X - scroll.scrollPositionX,Y - scroll.scrollPositionY,0.0,0.0,1.0, DX_PI_F/4,Graph, TRUE);//斜め右上or左下
+			DrawRotaGraph2F(X - scroll.positionX,Y - scroll.positionY,0.0,0.0,1.0, DX_PI_F/4,Graph, TRUE);//斜め右上or左下
 		}
 		if ((North && West) || (South && East))
 		{
-			DrawRotaGraph2F(X - scroll.scrollPositionX,Y - scroll.scrollPositionY,0.0,0.0,1.0, DX_PI_F*1.75,Graph, TRUE);//斜め左上or右下
+			DrawRotaGraph2F(X - scroll.positionX,Y - scroll.positionY,0.0,0.0,1.0, DX_PI_F*1.75,Graph, TRUE);//斜め左上or右下
 		}
     }
 }

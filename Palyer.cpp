@@ -63,9 +63,9 @@ void Player::Update(Scroll&scroll)
 	}
 
 	//強制壁判定
-	if (positionX > SCREEN_W - (width + 15 + 64) + scroll.scrollPositionX)//外に出ようとすると戻される
+	if (positionX > SCREEN_W - (width + 15 + 64) + scroll.positionX)//外に出ようとすると戻される
 	{
-		positionX= SCREEN_W - (width + 15 + 64) + scroll.scrollPositionX;//
+		positionX= SCREEN_W - (width + 15 + 64) + scroll.positionX;//
 	}
 	if (positionX < 64)
 	{
@@ -75,9 +75,9 @@ void Player::Update(Scroll&scroll)
 	{
 		positionY = 64;
 	}
-	if (positionY > SCREEN_H - (height + 15 + 64) + scroll.scrollPositionY)
+	if (positionY > SCREEN_H - (height + 15 + 64) + scroll.positionY)
 	{
-		positionY = SCREEN_H - (height + 15 + 64) + scroll.scrollPositionY;
+		positionY = SCREEN_H - (height + 15 + 64) + scroll.positionY;
 	}
 
 	//弾の発射制御と方向及び   動作確認済み
@@ -174,6 +174,6 @@ void Player::Draw(Scroll&scroll)
 {
 	if (hitFlag == true)
 	{
-		DrawRotaGraph2F(positionX - scroll.scrollPositionX,positionY - scroll.scrollPositionY,0,0,1.5,0.0,image,TRUE);
+		DrawRotaGraph2F(positionX - scroll.positionX,positionY - scroll.positionY,0,0,1.5,0.0,image,TRUE);
 	}
 }
