@@ -16,19 +16,19 @@ void EnemyShot::Init()
 
 void EnemyShot::enemyShotSet(Player&player,Enemy&enemy)
 {
-	enemyShotX = enemy.positionX + (enemy.W * 0.75);//敵の中央
-	enemyShotY = enemy.positionY + (enemy.H * 0.75);//敵の中央
+	enemyShotX = enemy.positionX + (enemy.width * 0.75);//敵の中央
+	enemyShotY = enemy.positionY + (enemy.height * 0.75);//敵の中央
 	enemyShotX = enemyShotX - (enemyShotW * 0.5);
 	enemyShotY = enemyShotY - (enemyShotH * 0.5);
 	NumericAngle = atan2f((float)(player.positionY + (player.height * 0.75) - enemyShotY), (float)(player.positionX + (player.width * 0.75) - enemyShotX));
 	angle = - NumericAngle * 180 / DX_PI_F ;//
-	sectorVectol = enemy.sectorVectol;
-	if (enemyShotflag == false && enemy.HitFlag == true)
+	sectorVectol = enemy.shotSectorVectol;
+	if (enemyShotflag == false && enemy.hitFlag == true)
 	{
 		enemyShotflag = true;//撃った後に進むようにする
 		enemyShotVisibleFlag = true;//見えるようにする
 	}
-	enemy.enemyShotintarvalcount = 30;//待ち時間これは働いている
+	enemy.shotIntarvalCount = 30;//待ち時間これは働いている
 }
 
 void EnemyShot::Update(Scroll&scroll)
