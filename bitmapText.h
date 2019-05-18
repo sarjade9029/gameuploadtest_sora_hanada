@@ -39,8 +39,8 @@ private:
 	unsigned int  m_sizeY        ; // フォント1文字分縦サイズ	
 	int           text_lx        ; // フォント画像の終了位置(初期値は1
 	int           text_ly        ; // フォント画像の終了位置(初期値は1
-	int           m_shadowOffsetX; // 影フォント位置オフセットX
-	int           m_shadowOffsetY; // 影フォント位置オフセットY
+	int           m_shadowOffsetX; // 影フォント位置オフセットpositionX
+	int           m_shadowOffsetY; // 影フォント位置オフセットpositionY
 	bool          m_useflag      ; // フォント使用可能フラグ
 	bool          m_bgalpha      ; // 文字背景を透過させるか
 

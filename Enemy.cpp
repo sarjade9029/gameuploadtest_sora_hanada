@@ -3,20 +3,20 @@
 void Enemy::Init()
 {
 	//敵画像
-	Graph = LoadGraph("data/texture/redbox.png");
+	graph = LoadGraph("data/texture/redbox.png");
 	//敵体力
-	Life = 3;
+	hitPoint = 3;
 	//適当座標
-	X = 540;//最初の一体が0.0に出ることの修正、出現位置は画面内？
-	Y = 540;
-	GetGraphSize(Graph, &W, &H);
+	positionX = 540;
+	positionY = 540;
+	GetGraphSize(graph, &width, &height);
 	enemyShotintarvalcount = 30;
-	HitFlag = true;
-	point = 200;
+	hitFlag = true;
+	scorePoint = 200;
 	sector = 0;
-	sectorvec = 0;
-	sectorflag = false;
-	outside_screen = true;
+	sectorVectol = 0;
+	sectorFlag = false;
+	outsideScreen = true;
 	aliveFlag = false;
 }
 //敵の更新
@@ -24,7 +24,7 @@ void Enemy::Update(Player&player,Scroll&scroll)
 {
 	if (aliveFlag == true)
 	{
-		HitFlag = true;
+		hitFlag = true;
 	}
 
 	if (enemyShotintarvalcount != 0)//機能確認済み
@@ -34,101 +34,101 @@ void Enemy::Update(Player&player,Scroll&scroll)
 	//
 	if (enemyShotintarvalcount == 0)
 	{
-		sectorvec = 0;
+		sectorVectol = 0;
 
 		if (sector - 2 == -2)
 		{
-			sectorvec -= DX_PI_F / 3;
+			sectorVectol -= DX_PI_F / 3;
 		}
 		if (sector - 2 == -1)
 		{
-			sectorvec -= DX_PI_F / 6;
+			sectorVectol -= DX_PI_F / 6;
 		}
 		if (sector - 2 == 0)
 		{
-			sectorvec = 0;
+			sectorVectol = 0;
 		}
 		if (sector - 2 == 1)
 		{
-			sectorvec += DX_PI_F / 6;
+			sectorVectol += DX_PI_F / 6;
 		}
 		if (sector - 2 == 2)
 		{
-			sectorvec += DX_PI_F / 3;
+			sectorVectol += DX_PI_F / 3;
 		}
 
 		if (sector >= 4)
 		{
-			sectorflag = true;
+			sectorFlag = true;
 		}
 		if (sector <= 0)
 		{
-			sectorflag = false;
+			sectorFlag = false;
 		}
 
-		if (sectorflag == false)
+		if (sectorFlag == false)
 		{
 			sector ++;
 		}
-		if (sectorflag == true)
+		if (sectorFlag == true)
 		{
 			sector --;
 		}
 	}
 
-	if (X >= SCREEN_W + scroll.positionX)//スクリーンの右端外
+	if (positionX >= SCREEN_W + scroll.positionX)//スクリーンの右端外
 	{
-		outside_screen = true;
+		outsideScreen = true;
 	}
-	if (X + W <= scroll.positionX)
+	if (positionX + width <= scroll.positionX)
 	{
-		outside_screen = true;
+		outsideScreen = true;
 	}
-	if (Y + H <= scroll.positionY)
+	if (positionY + height <= scroll.positionY)
 	{
-		outside_screen = true;
+		outsideScreen = true;
 	}
-	if (Y >= SCREEN_H + scroll.positionY)
+	if (positionY >= SCREEN_H + scroll.positionY)
 	{
-		outside_screen = true;
+		outsideScreen = true;
 	}
 	
 	//
-	if(X < 64)
+	if(positionX < 64)
 	{
-		X = 64;
+		positionX = 64;
 	}
-	if(X + 64 > SCREEN_W + 1920)
+	if(positionX + 64 > SCREEN_W + 1920)
 	{
-		X = SCREEN_W + 1920 - 256;
+		positionX = SCREEN_W + 1920 - 256;
 	}
-	if (Y < 64)
+	if (positionY < 64)
 	{
-		Y = 64;
+		positionY = 64;
 	}
-	if (Y + 64 > SCREEN_H + 1080)
+	if (positionY + 64 > SCREEN_H + 1080)
 	{
-		Y = SCREEN_H + 1080 - 256;
+		positionY = SCREEN_H + 1080 - 256;
 	}
 
 	//画面内
-	if ((X + W < SCREEN_W + scroll.positionX && X > 64 + scroll.positionX) && (Y > 64 + scroll.positionY && Y + H < SCREEN_H + scroll.positionY))
+	if ((positionX + width < SCREEN_W + scroll.positionX && positionX > 64 + scroll.positionX) && (positionY > 64 + scroll.positionY && positionY + height < SCREEN_H + scroll.positionY))
 	{
-		outside_screen = false;
+		outsideScreen = false;
 	}
 
 	//体力０なら消えようね
-	if (Life <= 0)
+	if (hitPoint <= 0)
 	{
 		aliveFlag = false;
 	}
 	if (aliveFlag == false)
 	{
-		player.score += point;
+		player.score += scorePoint;
 		player.scoreFlag = true;
-		HitFlag = false;
-		outside_screen =false;
-		Life = 3;
+		hitFlag = false;
+		outsideScreen =false;
+		hitPoint = 3;
 		
 	}
 }
@@ -137,6 +137,6 @@ void Enemy::Draw(Scroll&scroll)
 {
     if (aliveFlag == true)//ここは働いている
     {
-            DrawRotaGraph2F(X - scroll.positionX, Y - scroll.positionY,0.0,0.0,1.5,0.0, Graph, TRUE);
+            DrawRotaGraph2F(positionX - scroll.positionX, positionY - scroll.positionY,0.0,0.0,1.5,0.0, graph, TRUE);
     }
 }

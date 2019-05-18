@@ -5,14 +5,13 @@
 #include "Enemy.h"
 #include "player.h"
 
-class Player;
-//現状使うものしか置いてない
+//class Player;
 class Shot
 {
 public:
 	//shot_state
-    double		X;
-    double		Y;
+    double		positionX;
+    double		positionY;
     int		Xs;
     int		Ys;
 	int		Dmg;

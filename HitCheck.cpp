@@ -32,10 +32,10 @@ void HitCheck::hitcheck_pse(Shot& shot,Enemy& enemy,UI&ui)
 		{
 			if (!shot.South && !shot.North)
 			{
-				if (((shot.X > enemy.X && shot.X < enemy.X + enemy.W * 1.5) ||
-					(enemy.X > shot.X && enemy.X < shot.X + shot.H)) &&
-					((shot.Y > enemy.Y && shot.Y < enemy.Y + enemy.H * 1.5) ||
-					(enemy.Y > shot.Y && enemy.Y < shot.Y + shot.W)))
+				if (((shot.positionX > enemy.positionX && shot.positionX < enemy.positionX + enemy.W * 1.5) ||
+					(enemy.positionX > shot.positionX && enemy.positionX < shot.positionX + shot.H)) &&
+					((shot.positionY > enemy.positionY && shot.positionY < enemy.positionY + enemy.H * 1.5) ||
+					(enemy.positionY > shot.positionY && enemy.positionY < shot.positionY + shot.W)))
 				{
 					// 接触している場合は当たった弾の存在を消す
 					shot.VisibleFlag = false;
@@ -46,10 +46,10 @@ void HitCheck::hitcheck_pse(Shot& shot,Enemy& enemy,UI&ui)
 			}
 		}
 		// エネミーと弾の当たり判定
-		if (((shot.X > enemy.X && shot.X < enemy.X + enemy.W * 1.5) ||
-			(enemy.X > shot.X && enemy.X < shot.X + shot.W)) &&
-			((shot.Y > enemy.Y && shot.Y < enemy.Y + enemy.H * 1.5) ||
-			(enemy.Y > shot.Y && enemy.Y < shot.Y + shot.H)))
+		if (((shot.positionX > enemy.positionX && shot.positionX < enemy.positionX + enemy.W * 1.5) ||
+			(enemy.positionX > shot.positionX && enemy.positionX < shot.positionX + shot.W)) &&
+			((shot.positionY > enemy.positionY && shot.positionY < enemy.positionY + enemy.H * 1.5) ||
+			(enemy.positionY > shot.positionY && enemy.positionY < shot.positionY + shot.H)))
 		{
 			// 接触している場合は当たった弾の存在を消す
 			shot.VisibleFlag = false;
@@ -60,39 +60,39 @@ void HitCheck::hitcheck_pse(Shot& shot,Enemy& enemy,UI&ui)
 	}
 }
 
-void HitCheck::hitcheck_psc(Tg& target, Shot&shot,UI&ui)
+void HitCheck::hitcheck_psc(Target& target, Shot&shot,UI&ui)
 {
-	if (shot.VisibleFlag == true && target.Thp < 4)
+	if (shot.VisibleFlag == true && target.state < 4)
 	{
 		// ターゲットと自弾の当たり判定
-		if (((shot.X > target.X && shot.X < target.X + target.W * 1.55) ||
-			(target.X > shot.X && target.X < shot.X + shot.W)) &&
-			((shot.Y > target.Y && shot.Y < target.Y + target.H * 1.55) ||
-			(target.Y > shot.Y && target.Y < shot.Y + shot.H)))
+		if (((shot.positionX > target.positionX && shot.positionX < target.positionX + target.W * 1.55) ||
+			(target.positionX > shot.positionX && target.positionX < shot.positionX + shot.W)) &&
+			((shot.positionY > target.positionY && shot.positionY < target.positionY + target.H * 1.55) ||
+			(target.positionY > shot.positionY && target.positionY < shot.positionY + shot.H)))
 		{
 			// 接触している場合は当たった弾の存在を消す
 			shot.VisibleFlag = false;
 			//ここにクリスタルダメージ処理を入れる色の変更はtarget.updateにある
-			target.Thp += shot.Dmg;
+			target.state += shot.Dmg;
 		}
 	}
 }
 
-void HitCheck::hitcheck_pc(Tg& target, Player&player)
+void HitCheck::hitcheck_pc(Target& target, Player&player)
 {
-	if (player.hitFlag == true && target.Thp < 5)
+	if (player.hitFlag == true && target.state < 5)
 	{
 		// ターゲットと自弾の当たり判定
-		if (((player.positionX > target.X && player.positionX < target.X + target.W * 1.55) ||
-			(target.X > player.positionX && target.X < player.positionX + player.width * 1.5)) &&
-			((player.positionY > target.Y && player.positionY < target.Y + target.H * 1.55) ||
-			(target.Y > player.positionY && target.Y < player.positionY + player.height * 1.5)))
+		if (((player.positionX > target.positionX && player.positionX < target.positionX + target.W * 1.55) ||
+			(target.positionX > player.positionX && target.positionX < player.positionX + player.width * 1.5)) &&
+			((player.positionY > target.positionY && player.positionY < target.positionY + target.H * 1.55) ||
+			(target.positionY > player.positionY && target.positionY < player.positionY + player.height * 1.5)))
 		{
 			//接触しているだけ,hpと引き換えに相手にダメージ？
 			//ここで止めるなり戻すなりする
-			if (player.positionX > target.X && player.positionX <= target.X + target.W * 1.55)
+			if (player.positionX > target.positionX && player.positionX <= target.positionX + target.W * 1.55)
 			{
-				player.positionX = target.X + target.W * 1.55 + 7;
+				player.positionX = target.positionX + target.W * 1.55 + 7;
 			}
 		}
 		else

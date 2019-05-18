@@ -1,5 +1,5 @@
 ﻿#include "target.h"
-void Tg::Init()
+void Target::Init()
 {
 	//初期化
 	redGraph = LoadGraph("data/texture/redtarget.png");
@@ -11,99 +11,97 @@ void Tg::Init()
 	blueGraph3 = LoadGraph("data/texture/bluetarget3.png");
 	blueGraph1 = LoadGraph("data/texture/bluetarget1.png");
 	grayGraph= LoadGraph("data/texture/graytarget.png");
-	Thp = -5;
-	Ppt = 0;
-	Ept = 0;
-	X = 0;//固定位置四か所強制
-	Y = 0;
+	state = -5;
+	positionX = 0;//固定位置四か所強制
+	positionY = 0;
 	ux = 0;
 	uy = 0;
 	GetGraphSize(redGraph,&W,&H);
-	PptFlag = false;
-	EptFlag = false;
+	playerPointFlag = false;
+	enemyPointFlag = false;
 }
 
-void Tg::Update()
+void Target::Update()
 {
-	if (Thp >= 1)
+	if (state >= 1)
 	{
 		//クリスタルの色変更（青）
-		if (Thp > 4)
+		if (state > 4)
 		{
-			Thp = 4;//青色
+			state = 4;//青色
 		}
 		PptFlag = true;	
 	}
-	if (Thp >= 1 && Thp <= 3)
+	if (state >= 1 && state <= 3)
 	{
 		PptFlag = false;
 	}
-	if (Thp == 0)
+	if (state == 0)
 	{
 		//クリスタルの色（リセット）
 		PptFlag = false;
 		EptFlag = false;
 	}
-	if(Thp <= -1 && Thp >= 3)
+	if(state <= -1 && state >= 3)
 	{
 		EptFlag = false;
 	}
-	if (Thp <= -1)
+	if (state <= -1)
 	{
 		//クリスタルの色変更（赤）
-		if (Thp < -4)
+		if (state < -4)
 		{
-			Thp = -4;//赤色
+			state = -4;//赤色
 		}
 		EptFlag = true;
 	}
 }
 
-void Tg::Draw(Scroll&scroll)
+void Target::Draw(Scroll&scroll)
 {
 	//クリスタルの描画
-	if (Thp != 0)
+	if (state != 0)
 	{
 		//青表示
 
 		if (PptFlag == true)
 		{
-			DrawRotaGraph2F(X - scroll.positionX, Y - scroll.positionY, 0.0, 0.0, 1.55, 0.0, blueGraph, TRUE);
+			DrawRotaGraph2F(positionX - scroll.positionX, positionY - scroll.positionY, 0.0, 0.0, 1.55, 0.0, blueGraph, TRUE);
 		}
-		if (Thp == 3)
+		if (state == 3)
 		{
-			DrawRotaGraph2F(X - scroll.positionX, Y - scroll.positionY, 0.0, 0.0, 1.55, 0.0, blueGraph3, TRUE);
+			DrawRotaGraph2F(positionX - scroll.positionX, positionY - scroll.positionY, 0.0, 0.0, 1.55, 0.0, blueGraph3, TRUE);
 		}
-		if (Thp == 2)
+		if (state == 2)
 		{
-			DrawRotaGraph2F(X - scroll.positionX, Y - scroll.positionY, 0.0, 0.0, 1.55, 0.0, blueGraph2, TRUE);
+			DrawRotaGraph2F(positionX - scroll.positionX, positionY - scroll.positionY, 0.0, 0.0, 1.55, 0.0, blueGraph2, TRUE);
 		}
-		if (Thp == 1)
+		if (state == 1)
 		{
-			DrawRotaGraph2F(X - scroll.positionX, Y - scroll.positionY, 0.0, 0.0, 1.55, 0.0, blueGraph1, TRUE);
+			DrawRotaGraph2F(positionX - scroll.positionX, positionY - scroll.positionY, 0.0, 0.0, 1.55, 0.0, blueGraph1, TRUE);
 		}
 
 		//赤表示
 		if (EptFlag == true)
 		{
-			DrawRotaGraph2F(X - scroll.positionX, Y - scroll.positionY, 0.0, 0.0, 1.55, 0.0, redGraph, TRUE);
+			DrawRotaGraph2F(positionX - scroll.positionX, positionY - scroll.positionY, 0.0, 0.0, 1.55, 0.0, redGraph, TRUE);
 		}
-		if (Thp == -3)
+		if (state == -3)
 		{
-			DrawRotaGraph2F(X - scroll.positionX, Y - scroll.positionY, 0.0, 0.0, 1.55, 0.0, redGraph3, TRUE);
+			DrawRotaGraph2F(positionX - scroll.positionX, positionY - scroll.positionY, 0.0, 0.0, 1.55, 0.0, redGraph3, TRUE);
 		}
-		if (Thp == -2)
+		if (state == -2)
 		{
-			DrawRotaGraph2F(X - scroll.positionX, Y - scroll.positionY, 0.0, 0.0, 1.55, 0.0, redGraph2, TRUE);
+			DrawRotaGraph2F(positionX - scroll.positionX, positionY - scroll.positionY, 0.0, 0.0, 1.55, 0.0, redGraph2, TRUE);
 		}
-		if (Thp == -1)
+		if (state == -1)
 		{
-			DrawRotaGraph2F(X - scroll.positionX, Y - scroll.positionY, 0.0, 0.0, 1.55, 0.0, redGraph1, TRUE);
+			DrawRotaGraph2F(positionX - scroll.positionX, positionY - scroll.positionY, 0.0, 0.0, 1.55, 0.0, redGraph1, TRUE);
 		}
 	}
 	else
 	{
-		DrawRotaGraph2F(X - scroll.positionX, Y - scroll.positionY, 0.0, 0.0, 1.55, 0.0, grayGraph, TRUE);
+		DrawRotaGraph2F(positionX - scroll.positionX, positionY - scroll.positionY, 0.0, 0.0, 1.55, 0.0, grayGraph, TRUE);
 	}
 
 	//32*i+1=感覚を踏まえた値
@@ -114,22 +112,22 @@ void Tg::Draw(Scroll&scroll)
 	//描画の問題
 	
 
-	if (Thp != 0)
+	if (state != 0)
 	{
 		//青表示
 		if (PptFlag == true)
 		{
 			DrawRotaGraph2F(ux, uy, 0.0, 0.0, 1.55, 0.0, blueGraph, TRUE);
 		}
-		if (Thp == 3)
+		if (state == 3)
 		{
 			DrawRotaGraph2F(ux, uy, 0.0, 0.0, 1.55, 0.0, blueGraph3, TRUE);
 		}
-		if (Thp == 2)
+		if (state == 2)
 		{
 			DrawRotaGraph2F(ux, uy, 0.0, 0.0, 1.55, 0.0, blueGraph2, TRUE);
 		}
-		if (Thp == 1)
+		if (state == 1)
 		{
 			DrawRotaGraph2F(ux, uy, 0.0, 0.0, 1.55, 0.0, blueGraph1, TRUE);
 		}
@@ -139,15 +137,15 @@ void Tg::Draw(Scroll&scroll)
 		{
 			DrawRotaGraph2F(ux, uy, 0.0, 0.0, 1.55, 0.0, redGraph, TRUE);
 		}
-		if (Thp == -3)
+		if (state == -3)
 		{
 			DrawRotaGraph2F(ux, uy, 0.0, 0.0, 1.55, 0.0, redGraph3, TRUE);
 		}
-		if (Thp == -2)
+		if (state == -2)
 		{
 			DrawRotaGraph2F(ux, uy, 0.0, 0.0, 1.55, 0.0, redGraph2, TRUE);
 		}
-		if (Thp == -1)
+		if (state == -1)
 		{
 			DrawRotaGraph2F(ux, uy, 0.0, 0.0, 1.55, 0.0, redGraph1, TRUE);
 		}

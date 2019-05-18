@@ -19,7 +19,7 @@
 Player player;					//プレイヤー
 Enemy *enemy;					//エネミー
 Shot *shot;						//ショット
-Tg *target;						//ターゲット　
+Target *target;						//ターゲット　
 Map map;						//マップ
 HitCheck hitcheck;				//敵、自機の弾の判定　	
 EnemyShot **enemyshot;			//敵の弾
@@ -61,7 +61,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		}
 
 		//SHOTやenemyの詳細な数はCommonへ
-		target = new Tg[TARGET];
+		target = new Target[TARGET];
 		enemy = new Enemy[ENEMY];
 		shot = new Shot[SHOT];
 		enemyshot = new EnemyShot*[SHOT];
@@ -98,23 +98,23 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 		//ここの改善は分からん,ターゲットの位置取り
 		//左上
-		target[0].X = 640;
-		target[0].Y = 424;
+		target[0].positionX = 640;
+		target[0].positionY = 424;
 		target[0].ux = 1680;
 		target[0].uy = 1020;
 		//右上
-		target[1].X = SCREEN_W * 2 - 640;
-		target[1].Y = 424;
+		target[1].positionX = SCREEN_W * 2 - 640;
+		target[1].positionY = 424;
 		target[1].ux = 1740;
 		target[1].uy = 1020;
 		//左下
-		target[2].X = 640;
-		target[2].Y = SCREEN_H * 2 - 424;
+		target[2].positionX = 640;
+		target[2].positionY = SCREEN_H * 2 - 424;
 		target[2].ux = 1800;
 		target[2].uy = 1020;
 		//右下
-		target[3].X = SCREEN_W * 2 - 640;
-		target[3].Y = SCREEN_H * 2 - 424;
+		target[3].positionX = SCREEN_W * 2 - 640;
+		target[3].positionY = SCREEN_H * 2 - 424;
 		target[3].ux = 1860;
 		target[3].uy = 1020;
 
@@ -229,7 +229,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			{
 				for (int i = 0; i < SHOT; i++)
 				{
-					if (enemyshot[i][j].enemyShotflag == false && enemy[j].enemyShotintarvalcount == 0 && enemy[j].HitFlag == true && enemy[j].outside_screen == false)//ここに入ってきてしまう
+					if (enemyshot[i][j].enemyShotflag == false && enemy[j].enemyShotintarvalcount == 0 && enemy[j].HitFlag == true && enemy[j].outsideScreen == false)//ここに入ってきてしまう
 					{
 						//画面上限界が一体につき7発になっている
 						enemyshot[i][j].enemyShotSet(player, enemy[j]);
@@ -254,26 +254,26 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 				if (enemy[i].aliveFlag == true)
 				{
-					if ((enemy[i].X + enemy[i].W < 1920 && enemy[i].X > 64) &&
-						(enemy[i].Y > 64 && enemy[i].Y + enemy[i].H < 1080))
+					if ((enemy[i].positionX + enemy[i].W < 1920 && enemy[i].positionX > 64) &&
+						(enemy[i].positionY > 64 && enemy[i].positionY + enemy[i].H < 1080))
 					{
 						ui.enemycount++;
 					}
 
-					if ((enemy[i].X + enemy[i].W < 1920 && enemy[i].X > 64) &&
-						(enemy[i].Y > 1080 && enemy[i].Y + enemy[i].H < 2176))
+					if ((enemy[i].positionX + enemy[i].W < 1920 && enemy[i].positionX > 64) &&
+						(enemy[i].positionY > 1080 && enemy[i].positionY + enemy[i].H < 2176))
 					{
 						ui.enemycount2++;
 					}
 
-					if ((enemy[i].X + enemy[i].W < 3840 && enemy[i].X > 1920) &&
-						(enemy[i].Y > 1080 && enemy[i].Y + enemy[i].H < 2176))
+					if ((enemy[i].positionX + enemy[i].W < 3840 && enemy[i].positionX > 1920) &&
+						(enemy[i].positionY > 1080 && enemy[i].positionY + enemy[i].H < 2176))
 					{
 						ui.enemycount3++;
 					}
 
-					if ((enemy[i].X + enemy[i].W < 3840 && enemy[i].X > 1920) &&
-						(enemy[i].Y > 64 && enemy[i].Y + enemy[i].H < 1080))
+					if ((enemy[i].positionX + enemy[i].W < 3840 && enemy[i].positionX > 1920) &&
+						(enemy[i].positionY > 64 && enemy[i].positionY + enemy[i].H < 1080))
 					{
 						ui.enemycount4++;
 					}
@@ -289,8 +289,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 						if ((player.positionX + player.width < 1920 && player.positionX > 64) &&
 							(player.positionY > 64 && player.positionY + player.height < 1080))
 						{
-							enemy[i].X = rand() % (1664) + (128);
-							enemy[i].Y = rand() % (824) + (128);
+							enemy[i].positionX = rand() % (1664) + (128);
+							enemy[i].positionY = rand() % (824) + (128);
 							enemy[i].aliveFlag = true;
 							enemy[i].Life = 3;
 							player.witeTime = 60;
@@ -303,9 +303,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 						if ((player.positionX + player.width < 1920 && player.positionX > 64) &&
 							(player.positionY > 1080 && player.positionY + player.height < 2176))
 						{
-							enemy[i].X = rand() % (1664) + (128);
-							enemy[i].Y = rand() % (824) + (128);
-							enemy[i].Y += scroll.positionY;
+							enemy[i].positionX = rand() % (1664) + (128);
+							enemy[i].positionY = rand() % (824) + (128);
+							enemy[i].positionY += scroll.positionY;
 							enemy[i].aliveFlag = true;
 							enemy[i].Life = 3;
 							player.witeTime = 60;
@@ -318,10 +318,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 						if ((player.positionX + player.width < 3840 && player.positionX > 1920) &&
 							(player.positionY > 1080 && player.positionY + player.height < 2176))
 						{
-							enemy[i].X = rand() % (1664) + (128);
-							enemy[i].X += scroll.positionX;
-							enemy[i].Y = rand() % (824) + (128);
-							enemy[i].Y += scroll.positionY;
+							enemy[i].positionX = rand() % (1664) + (128);
+							enemy[i].positionX += scroll.positionX;
+							enemy[i].positionY = rand() % (824) + (128);
+							enemy[i].positionY += scroll.positionY;
 							enemy[i].aliveFlag = true;
 							enemy[i].Life = 3;
 							player.witeTime = 60;
@@ -333,9 +333,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 						if ((player.positionX + player.width < 3840 && player.positionX > 1920) &&
 							(player.positionY > 64 && player.positionY + player.height < 1080))
 						{
-							enemy[i].X = rand() % (1664) + (128);
-							enemy[i].X += scroll.positionX;
-							enemy[i].Y = rand() % (824) + (128);
+							enemy[i].positionX = rand() % (1664) + (128);
+							enemy[i].positionX += scroll.positionX;
+							enemy[i].positionY = rand() % (824) + (128);
 							enemy[i].aliveFlag = true;
 							enemy[i].Life = 3;
 							player.witeTime = 60;

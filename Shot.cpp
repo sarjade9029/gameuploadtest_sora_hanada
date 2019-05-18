@@ -19,9 +19,9 @@ void Shot::Setshot(Player* player)
 {
 	//プレイヤーの画像の中央を取る
 	//プレイヤーの横幅の中心
-	X = (player->positionX) + (player->width*0.75);
+	positionX = (player->positionX) + (player->width*0.75);
 	//プレイヤーの縦の中心
-	Y = (player->positionY) + (player->height*0.75);
+	positionY = (player->positionY) + (player->height*0.75);
 	if (Shotflag == false && player->shotDirection != 0)
 	{
 		VisibleFlag = true;
@@ -63,22 +63,22 @@ void Shot::Update(Scroll&scroll)
 	{ 
 		if (South == true)
 		{
-			Y += Ys;
+			positionY += Ys;
 		}
 		if (North == true)
 		{
-			Y -= Ys;
+			positionY -= Ys;
 		}
 		if (West == true)
 		{
-			X -= Xs;
+			positionX -= Xs;
 		}
 		if (East == true)
 		{
-			X += Xs;
+			positionX += Xs;
 		}
 	}
-	if (X > SCREEN_W - W + scroll.positionX|| X < 64 || Y < 64 || Y > SCREEN_H - H + scroll.positionY || X > SCREEN_W * 2 - (W + 64) || Y > SCREEN_H * 2 - (H + 48) || X < scroll.positionX || Y < scroll.positionY)//動いていなかったら弾の挙動がおかしくなる、消えないし
+	if (positionX > SCREEN_W - W + scroll.positionX|| positionX < 64 || positionY < 64 || positionY > SCREEN_H - H + scroll.positionY || positionX > SCREEN_W * 2 - (W + 64) || positionY > SCREEN_H * 2 - (H + 48) || positionX < scroll.positionX || positionY < scroll.positionY)//動いていなかったら弾の挙動がおかしくなる、消えないし
 	{
 		VisibleFlag = false;
 	}
@@ -105,23 +105,23 @@ void Shot::Draw(Scroll&scroll)
 		{
 			if (!East && !West)
 			{
-				DrawRotaGraph2F(X - scroll.positionX,Y - scroll.positionY,0.0,0.0,1.0, 0.0,Graph, TRUE);//上下
+				DrawRotaGraph2F(positionX - scroll.positionX,positionY - scroll.positionY,0.0,0.0,1.0, 0.0,Graph, TRUE);//上下
 			}
 		}
 		if (East || West)
 		{
 			if (!South && !North)
 			{
-				DrawRotaGraph2F(X - scroll.positionX,Y - scroll.positionY,0.0,0.0,1.0, DX_PI_F/2,Graph, TRUE);//左右
+				DrawRotaGraph2F(positionX - scroll.positionX,positionY - scroll.positionY,0.0,0.0,1.0, DX_PI_F/2,Graph, TRUE);//左右
 			}
 		}
 		if ((North && East) || (South && West))
 		{
-			DrawRotaGraph2F(X - scroll.positionX,Y - scroll.positionY,0.0,0.0,1.0, DX_PI_F/4,Graph, TRUE);//斜め右上or左下
+			DrawRotaGraph2F(positionX - scroll.positionX,positionY - scroll.positionY,0.0,0.0,1.0, DX_PI_F/4,Graph, TRUE);//斜め右上or左下
 		}
 		if ((North && West) || (South && East))
 		{
-			DrawRotaGraph2F(X - scroll.positionX,Y - scroll.positionY,0.0,0.0,1.0, DX_PI_F*1.75,Graph, TRUE);//斜め左上or右下
+			DrawRotaGraph2F(positionX - scroll.positionX,positionY - scroll.positionY,0.0,0.0,1.0, DX_PI_F*1.75,Graph, TRUE);//斜め左上or右下
 		}
     }
 }

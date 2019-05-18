@@ -17,8 +17,8 @@ public:
 	void hitcheck_pse(Shot& shot,Enemy& enemy,UI& ui);
 
 	//自弾とクリスタルの当たり判定
-	void hitcheck_psc(Tg& target,Shot& shot,UI& ui);
+	void hitcheck_psc(Target& target,Shot& shot,UI& ui);
 
 	//自機とクリスタルの当たり判定(未完
-	void hitcheck_pc(Tg& target,Player& player);
+	void hitcheck_pc(Target& target,Player& player);
 };

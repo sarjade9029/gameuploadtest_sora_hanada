@@ -1,16 +1,14 @@
 ﻿#pragma once
 #include "DxLib.h"
 #include "Scroll.h"
-class Tg
+class Target
 {
 public:
-	int t;			//ターゲットの細かい状態
-	int Ppt;			//プレイヤーのポイント
-	int Ept;			//敵のポイント
-	int X;				//横座標
-	int Y;				//縦座標
-	int H;
-	int W;
+	int state;			//ターゲットの細かい状態
+	int positionX;				//横座標
+	int positionY;				//縦座標
+	int Height;
+	int Width;
 	int ux;
 	int uy;
 	int redGraph;
@@ -24,8 +22,8 @@ public:
 	int grayGraph;
 	bool Visibleflag;
 	bool HitFlag;
-	bool PptFlag;			//ポイント獲得のフラグ
-	bool EptFlag;			//敵のポイント獲得のフラグ
+	bool playerPointFlag;			//ポイント獲得のフラグ
+	bool enemyPointFlag;			//敵のポイント獲得のフラグ
 	
 	void Init();			//初期化
 	void Update();			//更新

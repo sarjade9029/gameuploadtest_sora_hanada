@@ -15,7 +15,7 @@ public:
 	int		enemyShotH;
 	int		enemyShotW;
 	int		enemyShotDmg;
-	float	sectorvec;
+	float	sectorVectol;
 	float	NumericAngle;
 	float	angle;
 	float	speed;

@@ -25,7 +25,7 @@ void UI::Init(BitmapText &text)
 	enemycount3 = 0;
 	enemycount4 = 0;
 }
-void UI::Draw(Tg&target)
+void UI::Draw(Target&target)
 {
 
 }

@@ -29,6 +29,6 @@ public:
 	int		enemycount4;
 	int		cs[TARGET];							//ui用画像
 	void	Init(BitmapText & text);			//
-	void	Draw(Tg&target);					//
+	void	Draw(Target&target);					//
 
 };
