@@ -229,7 +229,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			{
 				for (int i = 0; i < SHOT; i++)
 				{
-					if (enemyshot[i][j].enemyShotflag == false && enemy[j].shotIntarvalCount == 0 && enemy[j].hitFlag == true && enemy[j].outsideScreen == false)//ここに入ってきてしまう
+					if (enemyshot[i][j].enemyShotflag == false && enemy[j].shotIntervalCount == 0 && enemy[j].hitFlag == true && enemy[j].outsideScreen == false)//ここに入ってきてしまう
 					{
 						//画面上限界が一体につき7発になっている
 						enemyshot[i][j].enemyShotSet(player, enemy[j]);

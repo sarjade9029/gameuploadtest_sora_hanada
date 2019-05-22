@@ -1,11 +1,7 @@
 ﻿#pragma once
 #include "DxLib.h"
 #include "Scroll.h"
-#define TUTMAP_WIDTH       30
-#define TUTMAP_HEIGHT      17
-#define ALLMAP_CHIP_SIZE	64
-#define MAINMAP_WIDTH		60 //58 1237 19
-#define MAINMAP_HEIGHT		34 //32 682 10
+#include "Common.h"
 class Map
 {
 public:
@@ -15,6 +11,6 @@ public:
 	void Drawtut();
 	void DrawMain(Scroll&scroll);
 
-	unsigned char datatut[TUTMAP_HEIGHT][TUTMAP_WIDTH];
-	unsigned char datamain[MAINMAP_HEIGHT][MAINMAP_WIDTH];
+	unsigned char datatut[TUTORIAL_MAP_HEIGHT][TUTORIAL_MAP_WIDTH];
+	unsigned char datamain[MAIN_MAP_HEIGHT][MAIN_MAP_WIDTH];
 };

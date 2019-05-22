@@ -1,6 +1,6 @@
 ﻿#include "Map.h"
 //ここら辺は省略の余地がありそう
-unsigned char tutmap[TUTMAP_HEIGHT][TUTMAP_WIDTH] =
+unsigned char tutmap[TUTORIAL_MAP_HEIGHT][TUTORIAL_MAP_WIDTH] =
 {
 	{2,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,3,},
 	{22,8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,8,25,},
@@ -21,7 +21,7 @@ unsigned char tutmap[TUTMAP_HEIGHT][TUTMAP_WIDTH] =
 	{6,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,7,},
 };
 
-unsigned char mainmap[MAINMAP_HEIGHT][MAINMAP_WIDTH] =
+unsigned char mainmap[MAIN_MAP_HEIGHT][MAIN_MAP_WIDTH] =
 {	//                                      /                                         /
 	{ 2,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26, 3, },
 	{ 22,8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,25, },
@@ -62,9 +62,9 @@ unsigned char mainmap[MAINMAP_HEIGHT][MAINMAP_WIDTH] =
 void Map::Inittut()
 {
 	MapChip = LoadGraph("data/texture/mapchip.png");//画像の読み込み出来ていない可能性
-	for (int iy = 0; iy < TUTMAP_HEIGHT; iy++)
+	for (int iy = 0; iy < TUTORIAL_MAP_HEIGHT; iy++)
 	{
-		for (int ix = 0; ix < TUTMAP_WIDTH; ix++)
+		for (int ix = 0; ix < TUTORIAL_MAP_WIDTH; ix++)
 		{
 			datatut[iy][ix] = tutmap[iy][ix];
 		}
@@ -74,9 +74,9 @@ void Map::Inittut()
 void Map::InitMain()
 {
 	MapChip = LoadGraph("data/texture/mapchip.png");//画像の読み込み出来ていない可能性
-	for (int iy = 0; iy < MAINMAP_HEIGHT; iy++)
+	for (int iy = 0; iy < MAIN_MAP_HEIGHT; iy++)
 	{
-		for (int ix = 0; ix < MAINMAP_WIDTH; ix++)
+		for (int ix = 0; ix < MAIN_MAP_WIDTH; ix++)
 		{
 			datamain[iy][ix] =	mainmap[iy][ix];
 		}
@@ -85,13 +85,13 @@ void Map::InitMain()
 
 void Map::Drawtut()
 {
-	for (int i = 0; i < TUTMAP_HEIGHT; i++)
+	for (int i = 0; i < TUTORIAL_MAP_HEIGHT; i++)
 	{
-		for (int j = 0; j < TUTMAP_WIDTH; j++)
+		for (int j = 0; j < TUTORIAL_MAP_WIDTH; j++)
 		{
-			DrawRectGraph(j * ALLMAP_CHIP_SIZE , i * ALLMAP_CHIP_SIZE , // 画面の表示位置 x, y
-				(datatut[i][j] % 4) * ALLMAP_CHIP_SIZE, (datatut[i][j] / 4) * ALLMAP_CHIP_SIZE,         // 元画像の切り出し位置 x, y
-				ALLMAP_CHIP_SIZE, ALLMAP_CHIP_SIZE,         // 切り出しサイズ　幅・高さ
+			DrawRectGraph(j * ALL_MAP_CHIP_SIZE , i * ALL_MAP_CHIP_SIZE , // 画面の表示位置 x, y
+				(datatut[i][j] % 4) * ALL_MAP_CHIP_SIZE, (datatut[i][j] / 4) * ALL_MAP_CHIP_SIZE,         // 元画像の切り出し位置 x, y
+				ALL_MAP_CHIP_SIZE, ALL_MAP_CHIP_SIZE,         // 切り出しサイズ　幅・高さ
 				MapChip, false, false);           // 元画像のハンドル、透明、反転
 		}
 	}
@@ -99,13 +99,13 @@ void Map::Drawtut()
 
 void Map::DrawMain(Scroll&scroll)
 {
-	for (int i = 0; i < MAINMAP_HEIGHT; i++)
+	for (int i = 0; i < MAIN_MAP_HEIGHT; i++)
 	{
-		for (int j = 0; j < MAINMAP_WIDTH; j++)
+		for (int j = 0; j < MAIN_MAP_WIDTH; j++)
 		{
-			DrawRectGraph(j * ALLMAP_CHIP_SIZE - scroll.positionX, i * ALLMAP_CHIP_SIZE - scroll.positionY, // 画面の表示位置 x, y
-				(datamain[i][j] % 4) * ALLMAP_CHIP_SIZE, (datamain[i][j] / 4) * ALLMAP_CHIP_SIZE,         // 元画像の切り出し位置 x, y
-				ALLMAP_CHIP_SIZE, ALLMAP_CHIP_SIZE,         // 切り出しサイズ　幅・高さ
+			DrawRectGraph(j * ALL_MAP_CHIP_SIZE - scroll.positionX, i * ALL_MAP_CHIP_SIZE - scroll.positionY, // 画面の表示位置 x, y
+				(datamain[i][j] % 4) * ALL_MAP_CHIP_SIZE, (datamain[i][j] / 4) * ALL_MAP_CHIP_SIZE,         // 元画像の切り出し位置 x, y
+				ALL_MAP_CHIP_SIZE, ALL_MAP_CHIP_SIZE,         // 切り出しサイズ　幅・高さ
 				MapChip, false, false);           // 元画像のハンドル、透明、反転
 		}
 	}

@@ -7,7 +7,11 @@
 #define ENEMY			20
 #define SHOT			9		// ショットの最大数.
 #define TARGET			4		//ターゲットの数
-#define ADD				3		//子機数
+#define TUTORIAL_MAP_WIDTH       30
+#define TUTORIAL_MAP_HEIGHT      17
+#define ALL_MAP_CHIP_SIZE	64
+#define MAIN_MAP_WIDTH		60 
+#define MAIN_MAP_HEIGHT		34 
 
 // スクリーンサイズ.
 #define SCREEN_W 1920

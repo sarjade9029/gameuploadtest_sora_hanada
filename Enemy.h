@@ -5,7 +5,7 @@
 class Enemy 
 {
 public:
-	int		shotIntarvalCount;						//エネミーが弾を出すためのクールタイム
+	int		shotIntervalCount;						//エネミーが弾を出すためのクールタイム
 	int		shotSector;								//エネミーの弾の発射方向をプレイヤーからずらす
 	
 	//場所を変える
@@ -20,7 +20,7 @@ public:
 	float	positionY;								//エネミーの縦の位置
 
 	//命名
-	float	shotSectorVectol;						//プレイヤーに向かって打つ弾の角度
+	float	shotSectorVector;						//プレイヤーに向かって打つ弾の角度
 	
 	bool	sectorFlag;								//エネミーの弾を
     bool	hitFlag;								//エネミーの当たり判定

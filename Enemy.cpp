@@ -1,5 +1,5 @@
 ﻿#include "Enemy.h"
-
+//敵の初期化
 void Enemy::Init()
 {
 	graph = LoadGraph("data/texture/redbox.png");
@@ -7,16 +7,17 @@ void Enemy::Init()
 	positionX = 540;
 	positionY = 540;
 	GetGraphSize(graph, &width, &height);
-	shotIntarvalCount = 30;
-	hitFlag = true;
+	shotIntervalCount = 30;
 	scorePoint = 200;
 	shotSector = 0;
-	shotSectorVectol = 0;
-	sectorFlag = false;
+	shotSectorVector = 0;
+	hitFlag = true;
 	outsideScreen = true;
+	sectorFlag = false;
 	aliveFlag = false;
 }
 
+//敵の更新
 void Enemy::Update(Player&player,Scroll&scroll)
 {
 	if (aliveFlag == true)
@@ -24,34 +25,34 @@ void Enemy::Update(Player&player,Scroll&scroll)
 		hitFlag = true;
 	}
 
-	if (shotIntarvalCount != 0)
+	if (shotIntervalCount != 0)
 	{
-		shotIntarvalCount--;
+		shotIntervalCount--;
 	}
 
-	if (shotIntarvalCount == 0)
+	if (shotIntervalCount == 0)
 	{
-		shotSectorVectol = 0;
+		shotSectorVector = 0;
 
 		if (shotSector - 2 == -2)
 		{
-			shotSectorVectol -= DX_PI_F / 3;
+			shotSectorVector -= DX_PI_F / 3;
 		}
 		if (shotSector - 2 == -1)
 		{
-			shotSectorVectol -= DX_PI_F / 6;
+			shotSectorVector -= DX_PI_F / 6;
 		}
 		if (shotSector - 2 == 0)
 		{
-			shotSectorVectol = 0;
+			shotSectorVector = 0;
 		}
 		if (shotSector - 2 == 1)
 		{
-			shotSectorVectol += DX_PI_F / 6;
+			shotSectorVector += DX_PI_F / 6;
 		}
 		if (shotSector - 2 == 2)
 		{
-			shotSectorVectol += DX_PI_F / 3;
+			shotSectorVector += DX_PI_F / 3;
 		}
 
 		if (shotSector >= 4)
@@ -127,6 +128,7 @@ void Enemy::Update(Player&player,Scroll&scroll)
 	}
 }
 
+//敵の描画
 void Enemy::Draw(Scroll&scroll)
 {
     if (aliveFlag == true)
